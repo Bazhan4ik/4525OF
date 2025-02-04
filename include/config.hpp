@@ -3,6 +3,7 @@
 #include <cstdio>
 #include "lemlib/api.hpp"
 #include "lemlib/chassis/trackingWheel.hpp"
+#include "pros/adi.hpp"
 #include "pros/distance.hpp"
 #include "pros/optical.h"
 #include "pros/optical.hpp"
@@ -29,6 +30,7 @@ extern pros::adi::DigitalOut pneumatic_robot_extension;
 extern pros::adi::DigitalOut pneumatic_intake;
 
 
+extern pros::adi::DigitalIn ringDetector;
 
 extern pros::Imu imu;
 

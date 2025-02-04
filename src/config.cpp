@@ -3,6 +3,7 @@
 #include "lemlib/chassis/trackingWheel.hpp"
 #include "lemlib/pid.hpp"
 #include "pros/adi.h"
+#include "pros/adi.hpp"
 #include "pros/distance.hpp"
 #include "pros/vision.hpp"
 
@@ -65,6 +66,7 @@ lemlib::OdomSensors sensors(&tw_vertical, nullptr, nullptr, nullptr, &imu);
 // lemlib::OdomSensors sensors(&tw_left_motors, &tw_right_motors, &tw_horizontal, nullptr, &imu);
 
 
+pros::adi::DigitalIn ringDetector ('G');
 
 
 pros::Rotation rotation_arm(3);

@@ -85,9 +85,13 @@ void Intake::task() {
   while(true) {
 
 
-    pros::lcd::print(6, "hue %f", opticalSensor.get_hue());
-    pros::lcd::print(7, "rgb %f", opticalSensor.get_rgb().red);
+    if(ringDetector.get_value()) {
+      pros::lcd::print(7, "PRESSED");
+    } else {
+      pros::lcd::print(7, "NO");
+    }
 
+    
 
 
     // if driver control
