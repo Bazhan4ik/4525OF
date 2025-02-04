@@ -4,8 +4,68 @@
 
 
 
+void auto_red_goalRush() {
+
+
+
+  chassis.moveToPoint(0, 32.5, 1500, { .maxSpeed=110 });
+  pneumatic_robot_extension.set_value(true);
+  intake.run(1);
+  chassis.waitUntilDone();
+  pneumatic_robot_extension.set_value(false);
+  chassis.moveToPoint(0, 15, 1000, { .forwards=false }); 
+  chassis.waitUntilDone();
+
+
+  left_motors.move(127);
+  right_motors.move(127);
+  pros::delay(300);
+  left_motors.move(-127);
+  right_motors.move(-127);
+  pros::delay(400);
+  left_motors.brake();
+  right_motors.brake();
+
+  pros::delay(500);
+
+  chassis.turnToPoint(-20, 35, 2000, { .forwards=false, .maxSpeed=80 });
+  chassis.moveToPoint(-20, 35, 2000, { .forwards=false, .maxSpeed=50 });
+
+  chassis.waitUntilDone();
+
+  intake.run();
+
+  chassis.turnToPoint(-45, 30, 1000);
+  chassis.moveToPoint(-45, 30, 3000, { .maxSpeed=60 });
+  pros::delay(200);
+  pneumatic_intake.set_value(false);
+  intake.run(1);
+  chassis.waitUntilDone();
+  chassis.setPose(0,0,0);
+  chassis.moveToPoint(0, 5, 1000, { .maxSpeed=50 });
+  chassis.waitUntilDone();
+  pneumatic_intake.set_value(true);
+  pros::delay(500);
+  intake.run();
+
+  chassis.moveToPoint(0, -5, 1000, { .forwards=false, .maxSpeed=50 });
+
+  return;
+
+  chassis.moveToPoint(-30, 33, 2000, { .forwards=false, .maxSpeed=40 });
+
+  chassis.turnToPoint(-31, 38, 2000);
+  chassis.moveToPoint(-31, 38, 2000, { .maxSpeed=40 });
+  lb.move(4);
+
+  chassis.waitUntilDone();
+  pros::delay(2000);
+  intake.stop();
+
+}
+
 void auto_awp_goalRush() {
-  chassis.moveToPoint(0, 32, 1000);
+  chassis.moveToPoint(0, 32.5, 1000);
   pneumatic_robot_extension.set_value(true);
   intake.run(1);
   chassis.waitUntilDone();
@@ -33,14 +93,14 @@ void auto_awp_goalRush() {
   intake.run();
   chassis.turnToPoint(26, 0, 3000, {  });
   chassis.moveToPoint(26, 0, 1000, { .maxSpeed=55 });
-  pros::delay(300);
+  pros::delay(100);
 
-  pneumatic_intake.set_value(true);
+  pneumatic_intake.set_value(false);
   intake.run(1);
 
   chassis.waitUntilDone();
   pros::delay(300);
-  pneumatic_intake.set_value(false);
+  pneumatic_intake.set_value(true);
   pros::delay(300);
 
   chassis.moveToPoint(24, 5, 3000, { .forwards=false, });
@@ -85,6 +145,7 @@ void auto_goalRush() {
   pneumatic_robot_extension.set_value(false);
   chassis.moveToPoint(0, 10, 1000, { .forwards=false });
   chassis.waitUntilDone();
+
   left_motors.move(127);
   right_motors.move(127);
   pros::delay(200);
@@ -99,6 +160,7 @@ void auto_goalRush() {
 
 
   chassis.turnToPoint(14.5, 23, 3200, { .forwards=false, .maxSpeed=80 });
+  return;
   chassis.moveToPoint(14.5, 23, 3000, { .forwards=false, .maxSpeed=50 });
 
   chassis.waitUntilDone();

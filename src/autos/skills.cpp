@@ -37,9 +37,9 @@ void skills() {
   chassis.setPose(0,0, 90);
 
 
-  // intake.run_auto();
+  intake.run();
   pros::delay(500);
-  // intake.stop();
+  intake.stop();
 
 
   chassis.moveToPoint(12.5, 0, 1000, { .maxSpeed=60 });
@@ -48,7 +48,7 @@ void skills() {
   chassis.moveToPoint(12.5, 20, 1000, { .forwards=false, .maxSpeed=70 });
   chassis.turnToHeading(90, 1000);
 
-  // intake.run_auto();
+  intake.run();
 
   chassis.moveToPoint(34.3, 20.4, 1000);
   chassis.turnToHeading(0, 1000);
@@ -62,7 +62,7 @@ void skills() {
   chassis.moveToPoint(15, 42.5, 1000, { .forwards=false });
   chassis.turnToHeading(0, 1000);
   // turns to the last corner ring, hits it a little
-  chassis.moveToPoint(15, 52, 1000);
+  chassis.moveToPoint(15, 54, 1000);
   
   // go to corner
   chassis.turnToPoint(7, 56.5, 1000, { .forwards=false });
@@ -91,9 +91,9 @@ void skills() {
   chassis.moveToPoint(35, -43, 1000);
   chassis.turnToHeading(-90, 1000);
 
-  chassis.moveToPoint(2, -44, 2000, { .maxSpeed=80 });
+  chassis.moveToPoint(2, -46, 2000, { .maxSpeed=80 });
   // doesnt hit the wall, touches the last ring??
-  chassis.moveToPoint(11, -44, 1000, { .forwards=false });
+  chassis.moveToPoint(11, -46, 1000, { .forwards=false });
   chassis.turnToHeading(180, 1000);
   // aligns with the last ring??
 
@@ -107,39 +107,63 @@ void skills() {
   grab = false;
 
   // align with the high stake
-  chassis.moveToPoint(55.7, -38.5, 3000, { .maxSpeed=70 });
-  // intake.stop();
+  chassis.moveToPoint(56, -40, 3000, { .maxSpeed=70 });
+  intake.stop();
   chassis.turnToHeading(180, 1000);
   
   // move closer to the high stake
-  chassis.moveToPoint(59, -61.5, 3000, { .maxSpeed=35 });
+  chassis.moveToPoint(57, -61.5, 3000, { .maxSpeed=35 });
   lb.move(1);
-  // intake.run_auto();
+  intake.run();
 
   chassis.waitUntilDone();
 
   align();
 
-  chassis.setPose(0,0, chassis.getPose().theta);
-  chassis.moveToPoint(0, 2.5, 1000, { .forwards=false, .maxSpeed=60, });
-  chassis.waitUntilDone();
+  chassis.setPose(0,0, 0);
 
-  // intake.reverse();
+  intake.setReverse(true);
   lb.move(4);
-  // intake.stop();
+  intake.stop();
 
   lb.waitUntilDone();
+  chassis.moveToPoint(0, -6, 1000, { .forwards=false });
+  chassis.waitUntilDone();
+
   lb.move(0);
+  lb.waitUntilDone();
+  intake.run();
+  pros::delay(1000);
+  intake.setReverse(false);
+  intake.stop();
+
+
+
+  chassis.turnToPoint(-56, -54, 2000, { .forwards=false });
+  chassis.moveToPoint(-56, -54, 5000, { .forwards=false, .maxSpeed=80 });
+
+  chassis.turnToPoint(-62, -4, 3000, {  });
+  chassis.moveToPoint(-62, -4, 3000, {  });
+  chassis.moveToPoint(-62, -4, 3000, {  });
+  chassis.moveToPoint(-58, -20, 3000, { .forwards=false });
+  chassis.moveToPoint(-59, -118, 5000, {  });
+
+  return;
+
 
   chassis.moveToPoint(0, 12, 1000, { .forwards=false, });
   chassis.turnToHeading(90, 1000);
 
   chassis.moveToPoint(21, 14, 1000);
-  // intake.run_time(500);
+  chassis.waitUntilDone();
+  intake.setSpeed(80);
+  intake.run();
+  pros::delay(350);
+  intake.stop();
   chassis.turnToPoint(24, 33, 1000);
   chassis.moveToPoint(24, 33, 1000);
-  // intake.stop();
-  // intake.run_auto_wheels();
+  intake.setSpeed(127);
+  intake.run(1);
 
   chassis.turnToPoint(44, 57, 2000, { .forwards=false });
   chassis.moveToPoint(44, 57, 2000, { .forwards=false, .maxSpeed=40 });
@@ -149,7 +173,7 @@ void skills() {
   // chassis.moveToPoint();
   // intake.run_auto();
   // intake.stop();
-  // intake.run_auto();
+  intake.run();
 
   chassis.turnToPoint(21.5, 80.5, 2000);
   chassis.moveToPoint(21.5, 80.5, 2000);
@@ -161,6 +185,6 @@ void skills() {
 
   chassis.waitUntilDone();
   pros::delay(2000);
-  // intake.stop();
+  intake.stop();
   mogo_ungrab();
 }

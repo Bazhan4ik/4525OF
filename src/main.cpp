@@ -43,8 +43,19 @@ void competition_initialize() {}
 
 
 void autonomous() {
+  pneumatic_intake.set_value(true);
 
+  // auto_5Rings();
+  // auto_goalRush();
 
+  // auto_awp_safe();
+
+  // return;
+  // skills();
+  // auto_goalRush();
+
+  auto_red_goalRush();
+  return;
   auto_red_awp_5Rings();
   return;
   auto_red_5Rings();
@@ -71,6 +82,7 @@ void autonomous() {
 
 
 void opcontrol() {
+  pneumatic_intake.set_value(true);
   intake.setMode(1);
   lb.setMode(1);
 
@@ -104,15 +116,13 @@ void opcontrol() {
       }
     }
 
+    if(master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+      lb.reset();
+    }
+
     if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
       curext = !curext;
       pneumatic_robot_extension.set_value(curext);
-    }
-
-    if(master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-      pneumatic_intake.set_value(true);
-    } else {
-      pneumatic_intake.set_value(false);
     }
 
 

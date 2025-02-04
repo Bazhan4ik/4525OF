@@ -1,6 +1,9 @@
 
 
 
+extern void auto_red_goalRush();
+
+
 extern void skills();
 
 extern void auto_goalRush();

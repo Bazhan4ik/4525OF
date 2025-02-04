@@ -48,12 +48,12 @@ void LadyBrown::move(int position) {
     maxSpeed = 127;
     currentTarget = 18000;
   } else if(position == 0) {
-    if(mode == 1) {
-      lady_brown_arm.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-      lady_brown_arm.move(-127);
-      finished = true;
-      return;
-    }
+    // if(mode == 1) {
+    //   lady_brown_arm.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    //   lady_brown_arm.move(-127);
+    //   finished = true;
+    //   return;
+    // }
     maxSpeed = 80;
     currentTarget = 0;
   }
@@ -141,7 +141,7 @@ void LadyBrown::task() {
       if(currentTarget == 0) {
         lady_brown_arm.move(-50);
         pros::delay(50);
-        reset();
+        // reset();
         lady_brown_arm.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
       }
 

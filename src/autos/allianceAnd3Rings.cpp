@@ -22,12 +22,12 @@ void auto_awp_safe() {
   chassis.moveToPoint(33.5, -35.8, 2000, { .forwards=false, .maxSpeed=50 });
 
   chassis.turnToPoint(16, -19, 2000, { .maxSpeed=80 });
-  pneumatic_intake.set_value(true);
+  pneumatic_intake.set_value(false);
   intake.run(1);
   chassis.moveToPoint(16, -19, 2000, { .maxSpeed=50 });
   chassis.waitUntilDone();
   pros::delay(300);
-  pneumatic_intake.set_value(false);
+  pneumatic_intake.set_value(true);
   pros::delay(300);
 
   chassis.moveToPoint(22, -25.5, 2000, {.forwards=false});
@@ -57,11 +57,19 @@ void auto_awp_safe() {
 
 void auto_5Rings() {
   chassis.moveToPoint(0, -31, 2000, { .forwards=false, .maxSpeed=60 });
-  chassis.turnToPoint(-22, -34.5, 2000, { .maxSpeed=80 });
+  chassis.turnToPoint(-21, -38, 2000, { .maxSpeed=80 });
   intake.run();
-  chassis.moveToPoint(-22, -34.5, 1000, { .maxSpeed=60 });
-  chassis.turnToPoint(-33, -28, 2000, { .maxSpeed=80 });
-  chassis.moveToPoint(-33, -28, 2000, { .maxSpeed=50 });
+  chassis.moveToPoint(-21, -38, 1000, { .maxSpeed=60 });
+  chassis.turnToPoint(-30, -36, 2000, { .maxSpeed=80 });
+  chassis.moveToPoint(-30, -36, 2000, { .maxSpeed=50 });
+
+  chassis.turnToPoint(-37, -34, 1000, { .maxSpeed=30 });
+  
+
+  chassis.waitUntilDone();
+  intake.stop();
+
+  return;
 
 
   chassis.turnToPoint(-26, -20, 1000, {}); 
@@ -72,11 +80,11 @@ void auto_5Rings() {
   chassis.waitUntilDone();
   pros::delay(500);
   chassis.moveToPoint(24.6, -18, 2000, { .maxSpeed=60 });
-  pneumatic_intake.set_value(true);
+  pneumatic_intake.set_value(false);
   intake.run(1);
   chassis.waitUntilDone();
   pros::delay(100);
-  pneumatic_intake.set_value(false);
+  pneumatic_intake.set_value(true);
   pros::delay(500);
 
   chassis.moveToPoint(12, -17, 2000, { .forwards=false });
@@ -107,11 +115,11 @@ void auto_red_5Rings() {
   chassis.waitUntilDone();
   pros::delay(500);
   chassis.moveToPoint(-24.6, -18, 2000, { .maxSpeed=60 });
-  pneumatic_intake.set_value(true);
+  pneumatic_intake.set_value(false);
   intake.run(1);
   chassis.waitUntilDone();
   pros::delay(100);
-  pneumatic_intake.set_value(false);
+  pneumatic_intake.set_value(true);
   pros::delay(500);
 
   chassis.moveToPoint(-12, -17, 2000, { .forwards=false });
