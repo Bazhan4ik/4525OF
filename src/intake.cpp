@@ -81,14 +81,23 @@ void Intake::task() {
   opticalSensor.set_led_pwm(99);
 
   bool sortRingDetected = false;
+  bool nextBlueRing = true;
 
   while(true) {
+    if(opticalSensor.get_proximity() > 244) {
+      nextBlueRing = opticalSensor.get_rgb().blue > opticalSensor.get_rgb().red;
+    }
 
+    pros::lcd::print(7, "proximity %d", opticalSensor.get_proximity());
 
-    if(ringDetector.get_value()) {
-      pros::lcd::print(7, "PRESSED");
+    if(ringDetector.get_value() && nextBlueRing) {
+      pros::delay(50);
+      motors.setBrakeMode(pros::MotorBrake::hold);
+      motors.stopChain();
+      motors.stopWheels();
+      pros::delay(350);
     } else {
-      pros::lcd::print(7, "NO");
+      motors.setBrakeMode(pros::MotorBrake::coast);
     }
 
     

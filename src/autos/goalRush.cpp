@@ -11,22 +11,15 @@ void auto_red_goalRush() {
   chassis.moveToPoint(0, 32.5, 1500, { .maxSpeed=110 });
   pneumatic_robot_extension.set_value(true);
   intake.run(1);
+  chassis.waitUntil(29);
+  pneumatic_robot_extension.set_value(false);
+  chassis.moveToPoint(0, 20, 1000, { .forwards=false }); 
+  chassis.waitUntilDone();
+  pneumatic_robot_extension.set_value(true);
+  pros::delay(1000);
+  chassis.moveToPoint(0,13, 1000, {.forwards=false });
   chassis.waitUntilDone();
   pneumatic_robot_extension.set_value(false);
-  chassis.moveToPoint(0, 15, 1000, { .forwards=false }); 
-  chassis.waitUntilDone();
-
-
-  left_motors.move(127);
-  right_motors.move(127);
-  pros::delay(300);
-  left_motors.move(-127);
-  right_motors.move(-127);
-  pros::delay(400);
-  left_motors.brake();
-  right_motors.brake();
-
-  pros::delay(500);
 
   chassis.turnToPoint(-20, 35, 2000, { .forwards=false, .maxSpeed=80 });
   chassis.moveToPoint(-20, 35, 2000, { .forwards=false, .maxSpeed=50 });

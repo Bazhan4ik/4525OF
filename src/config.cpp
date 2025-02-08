@@ -38,7 +38,7 @@ pros::adi::DigitalOut pneumatic_mogo_grabber('B', LOW);
 pros::adi::DigitalOut pneumatic_robot_extension('C', LOW);
 pros::adi::DigitalOut pneumatic_intake('D', LOW);
 
-pros::MotorGroup right_motors({-5, -7, 8}, pros::MotorGearset::blue);   // left motors on ports 1, 2, 3
+pros::MotorGroup right_motors({-5, -9, 8}, pros::MotorGearset::blue);   // left motors on ports 1, 2, 3
 pros::MotorGroup left_motors({19, -20, 17}, pros::MotorGearset::blue); // right motors on ports 4, 5, 6
 
 
@@ -51,7 +51,7 @@ pros::MotorGroup left_motors({19, -20, 17}, pros::MotorGearset::blue); // right 
 pros::Imu imu(4);
 
 // pros::Rotation rotation_horizontal (9);
-pros::Rotation rotation_vertical (9);
+pros::Rotation rotation_vertical (-6);
 
 
 // lemlib::TrackingWheel tw_horizontal(&rotation_horizontal, t_wheel_diameter, horizontal_tw_offset);
