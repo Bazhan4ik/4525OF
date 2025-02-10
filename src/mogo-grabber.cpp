@@ -25,15 +25,15 @@ void mogo_grabber() {
     if(grabbed) {
       continue;
     }
-    if(givetime) {
-      givetime = false;
-      pros::delay(500);
-    }
 
     if(grab) {
 
 
       if(distance_sensor.get_distance() < 23) {
+        if(givetime) {
+          givetime = false;
+          pros::delay(100);
+        }
         pneumatic_mogo_grabber.set_value(true);
         master.rumble(".");
         grabbed = true;

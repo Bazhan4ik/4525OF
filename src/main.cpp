@@ -44,38 +44,7 @@ void competition_initialize() {}
 
 void autonomous() {
   pneumatic_intake.set_value(true);
-
-  // auto_5Rings();
-  // auto_goalRush();
-
-  // auto_awp_safe();
-
-  // return;
-  // skills();
-  // auto_goalRush();
-
-  auto_red_goalRush();
-  return;
-  auto_red_awp_5Rings();
-  return;
-  auto_red_5Rings();
-  return;
-  auto_5Rings();
-  return;
-  // USABLE
-  auto_awp_5Rings();
-  return;
-  // USABLE
-  auto_awp_safe();
-  return;
-  // USABLE
-  auto_goalRush();
-  return;
-  // USABLE
-  auto_awp_goalRush();
-  return;
-
-  
+ 
   skills();
 }
 

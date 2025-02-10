@@ -24,7 +24,7 @@ double wheel_diatemeter = lemlib::Omniwheel::NEW_325;
 
 
 double horizontal_tw_offset = -1.0;
-double vertical_tw_offset = 1.0;
+double vertical_tw_offset = 0;
 
 
 pros::MotorGroup intake_chain ({14});
@@ -36,10 +36,10 @@ pros::adi::DigitalOut pneumatic_mogo_grabber('B', LOW);
 // extension arm to move corner rings
 
 pros::adi::DigitalOut pneumatic_robot_extension('C', LOW);
-pros::adi::DigitalOut pneumatic_intake('D', LOW);
+pros::adi::DigitalOut pneumatic_intake('D', HIGH);
 
 pros::MotorGroup right_motors({-5, -9, 8}, pros::MotorGearset::blue);   // left motors on ports 1, 2, 3
-pros::MotorGroup left_motors({19, -20, 17}, pros::MotorGearset::blue); // right motors on ports 4, 5, 6
+pros::MotorGroup left_motors({19, -16, 17}, pros::MotorGearset::blue); // right motors on ports 4, 5, 6
 
 
 

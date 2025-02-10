@@ -20,6 +20,7 @@ public:
 
   void setBrakeMode(pros::MotorBrake type);
 
+
   bool isReversed() { return reversed; }
 };
 
@@ -40,6 +41,7 @@ public:
 
   Intake();
 
+  int scored;
 
   static void taskWrapper(void* instance);
 
@@ -57,6 +59,7 @@ public:
 
   void setMode(int mode);
 
+  void waitUntilScored(int timeout);
 };
 
 

@@ -1,8 +1,8 @@
 #include "intake.hpp"
 #include "config.hpp"
 #include "pros/abstract_motor.hpp"
-#include "pros/llemu.hpp"
 #include "pros/misc.h"
+#include "pros/rtos.hpp"
 
 
 
@@ -13,6 +13,7 @@ Intake::Intake() {
   wheelsAllowed = false;
   chainAllowed = false;
   mode = 0;
+  scored = 0;
   IntakeMotors motors;
 }
 
@@ -72,30 +73,48 @@ void Intake::stop() {
 
 
 
+void Intake::waitUntilScored(int timeout) {
+  int timer = pros::millis();
+  while(true) {
+    if(ringDetector.get_value()) {
+      pros::delay(100);
+      return;
+    }
+    if(timer + timeout < pros::millis()) {
+      return;
+    }
+    pros::delay(25);
+  }
+}
 
 
 
 
 void Intake::task() {
-  opticalSensor.set_integration_time(15);
+  opticalSensor.set_integration_time(20);
   opticalSensor.set_led_pwm(99);
 
   bool sortRingDetected = false;
   bool nextBlueRing = true;
 
   while(true) {
+    // ring detected at the bottom of intake
     if(opticalSensor.get_proximity() > 244) {
+      // next ring is blue
       nextBlueRing = opticalSensor.get_rgb().blue > opticalSensor.get_rgb().red;
     }
 
-    pros::lcd::print(7, "proximity %d", opticalSensor.get_proximity());
-
-    if(ringDetector.get_value() && nextBlueRing) {
-      pros::delay(50);
-      motors.setBrakeMode(pros::MotorBrake::hold);
-      motors.stopChain();
-      motors.stopWheels();
-      pros::delay(350);
+    // button at the top is pressed and the ring is blue -> throw it away
+    if(ringDetector.get_value()) {
+      if(nextBlueRing) {
+        pros::delay(50);
+        motors.setBrakeMode(pros::MotorBrake::hold);
+        motors.stopChain();
+        motors.stopWheels();
+        pros::delay(350);
+      } else {
+        scored += 1;
+      }
     } else {
       motors.setBrakeMode(pros::MotorBrake::coast);
     }
