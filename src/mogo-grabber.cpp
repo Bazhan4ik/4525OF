@@ -29,7 +29,7 @@ void mogo_grabber() {
     if(grab) {
 
 
-      if(distance_sensor.get_distance() < 23) {
+      if(distance_sensor.get_distance() < 20) {
         if(givetime) {
           givetime = false;
           pros::delay(100);

@@ -75,10 +75,10 @@ void skillsAfter2HighStake() {
 
 
   // go to mogo
-  givetime = true;
+  
   chassis.turnToPoint(107.3, 3.5, 2000, { .forwards=false });
   // chassis.moveToPoint(97.5, -7.5, 1000, { .forwards=false, .minSpeed=80, .earlyExitRange=5 });
-  chassis.moveToPoint(107.3, 3.5, 2000, { .forwards=false, .maxSpeed=70 });
+  chassis.moveToPoint(107.3, 0.5, 2000, { .forwards=false, .maxSpeed=60 });
 
   // take 3rd ring
   chassis.turnToPoint(85, 52, 3000);
@@ -150,11 +150,12 @@ void skills() {
   pneumatic_intake.set_value(false);
 
 
-  // chassis.setPose(60,-60, 180);
-  // skillsAfter2HighStake();
+  chassis.setPose(60,-60, 180);
+  skillsAfter2HighStake();
 
 
-  // return;
+
+  return;
 
   chassis.setPose(0,0, 90);
 
