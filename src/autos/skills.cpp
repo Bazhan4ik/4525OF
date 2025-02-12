@@ -60,6 +60,8 @@ void skillsAfter2HighStake() {
   chassis.moveToPoint(60, -47, 1000, { .forwards=false });
   lb.move(0);
 
+  return;
+
   // take first ring 
   chassis.turnToPoint(81, -47, 2000);
   chassis.moveToPoint(81, -47, 2000);
@@ -150,12 +152,12 @@ void skills() {
   pneumatic_intake.set_value(false);
 
 
-  chassis.setPose(60,-60, 180);
-  skillsAfter2HighStake();
+  // chassis.setPose(60,-60, 180);
+  // skillsAfter2HighStake();
 
 
 
-  return;
+  // return;
 
   chassis.setPose(0,0, 90);
 
@@ -167,20 +169,25 @@ void skills() {
   intake.scored = 0;
 
 
+
+  // move back from alliance stake
   chassis.moveToPoint(12.5, 0, 1000, { .maxSpeed=90 });
   chassis.turnToHeading(180, 1000);
 
+
+  // pick up mogo
   chassis.moveToPoint(14, 21.1, 1000, { .forwards=false, .maxSpeed=70 });
   chassis.turnToHeading(90, 1000);
 
+  // pickup first ring
   chassis.moveToPoint(33, 21, 1000);
-  intake.setSpeed(70);
   intake.run();
-  intake.waitUntilScored(1000);
-  chassis.turnToHeading(135, 1000);
-  chassis.waitUntil(10);
+
+  // turn to the ring in the middle
+  chassis.turnToHeading(135, 1000, { .earlyExitRange=50 });
+  intake.waitUntilScored(2000);
+
   intake.run(1);
-  intake.setSpeed(127);
 
 
   // go to the middle
@@ -189,13 +196,12 @@ void skills() {
   intake.run();
   // currently picking up ring in the middle
   chassis.turnToHeading(45, 1000);
+  // intake.waitUntilScored(2000);
   // go to the ring that goes to lady brown
   chassis.moveToPoint(83, 22.5, 2000, { .maxSpeed=80 });
   intake.run(1);
 
-  // turn to the high stake
-  chassis.turnToPoint(63, 53.5, 1000);
-  intake.run();
+
   // if only one ring was scored, wait until second one is scored
   // only third ring goes to lady brown
   // if(intake.scored < 2) {
@@ -203,19 +209,24 @@ void skills() {
   // }
   // intake.stop();
 
+
+  // turn to the high stake
+  chassis.turnToPoint(63, 44.0, 1000, { .minSpeed=80, .earlyExitRange=30 });
+  intake.run();
+
   // align with the high stake
-  chassis.moveToPoint(63, 50.0, 2000, { .maxSpeed=70 });
+  chassis.moveToPoint(66, 50.0, 2000, { .maxSpeed=70, .minSpeed=40, .earlyExitRange=12 });
+  chassis.moveToPoint(63.5, 65,  2000, { .maxSpeed=55, .minSpeed=35 });
 
 
-  chassis.turnToHeading(0, 1000);
+  // chassis.turnToHeading(0, 1000);
   lb.move(1);
   intake.run(1);
 
   // get close to highstake
-  chassis.moveToPoint(62.5, 65, 1000, { .maxSpeed=45 });
   lb.waitUntilDone();
   intake.run();
-  intake.waitUntilScored(1000);
+  intake.waitUntilScored(3000);
   intake.stop();
   // chassis.waitUntil(7);
   lb.move(4);
@@ -248,9 +259,9 @@ void skills() {
   // =====>
   // CHANGE TO 4
   // because 3 rings have to be scored before grabbing the last one
-  if(intake.scored < 3) {
-    intake.waitUntilScored(2000);
-  }
+  // if(intake.scored < 3) {
+  //   intake.waitUntilScored(2000);
+  // }
   // chassis.waitUntilDone();
   intake.run(1);
   
@@ -260,14 +271,15 @@ void skills() {
   chassis.moveToPoint(5, 59, 1000, { .forwards=false });
   mogo_ungrab();
   grab = false;
+
   
   // mave away from the corner to not hit the wall
   chassis.moveToPoint(14, 55, 1000, { });
   intake.run();
-  pros::delay(200);
+  pros::delay(250);
   intake.stop();
   // turn to the second mogo
-  chassis.turnToHeading(0, 1000);
+  chassis.turnToHeading(0, 1000, { .minSpeed=20, .earlyExitRange=10 });
   grab = true;
 
 
@@ -277,14 +289,18 @@ void skills() {
 
 
   // turn to the first ring
+  // chassis.turnToPoint(29, -23, 1000, { .minSpeed=30, .earlyExitRange=30 });
   chassis.turnToPoint(29, -23, 1000);
   chassis.moveToPoint(29, -23, 1000);
   intake.run();
 
 
   // turn to the second ring
+  // chassis.turnToPoint(33, -45.6, 1000, { .minSpeed=30, .earlyExitRange=30 });
   chassis.turnToPoint(33, -45.6, 1000);
   chassis.moveToPoint(33, -45.6, 1000);
+
+
 
   // pickup two rings
   chassis.turnToPoint(3, -49, 3000);
@@ -294,8 +310,9 @@ void skills() {
   chassis.moveToPoint(11, -49, 3000, { .forwards=false, });
 
   // pickup last ring
-  chassis.turnToPoint(11.5, -56, 1000);
-  chassis.moveToPoint(11.5, -56, 1000);
+  chassis.turnToPoint(10.5, -56, 1000);
+  chassis.moveToPoint(10.5, -56, 1000);
+  chassis.waitUntilDone();
 
   // turn to corner
   chassis.turnToPoint(3, -60, 1000, { .forwards=false });
@@ -314,7 +331,7 @@ void skills() {
   chassis.moveToPoint(56, -44.5, 3000, { .maxSpeed=40 });
   grab = true;
 
-  chassis.turnToHeading(180, 1000);
+  chassis.turnToHeading(180, 1000, { .minSpeed=20, .earlyExitRange=20 });
 
   // close to high stake
   chassis.moveToPoint(56.8, -66, 2000, { .maxSpeed=40 });
