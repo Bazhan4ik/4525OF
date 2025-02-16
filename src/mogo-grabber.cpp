@@ -20,7 +20,7 @@ void mogo_grabber() {
   while(true) {
     pros::delay(20);
 
-    pros::lcd::print(3, "%d", distance_sensor.get_distance());
+    // pros::lcd::print(3, "%d", distance_sensor.get_distance());
 
     if(grabbed) {
       continue;
@@ -29,14 +29,14 @@ void mogo_grabber() {
     if(grab) {
 
 
-      if(distance_sensor.get_distance() < 20) {
+      if(distance_sensor.get_distance() < 22) {
         if(givetime) {
           givetime = false;
-          pros::delay(100);
+          pros::delay(250);
         }
         pneumatic_mogo_grabber.set_value(true);
-        master.rumble(".");
         grabbed = true;
+        master.rumble(".");
       }
 
       
@@ -46,7 +46,7 @@ void mogo_grabber() {
 }
 void mogo_ungrab() {
   pneumatic_mogo_grabber.set_value(false);
-  givetime = true;
+  givetime = false;
   grab = true;
   grabbed = false;
 }

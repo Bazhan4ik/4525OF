@@ -77,7 +77,7 @@ void Intake::waitUntilScored(int timeout) {
   int timer = pros::millis();
   while(true) {
     if(ringDetector.get_value()) {
-      pros::delay(100);
+      pros::delay(200);
       return;
     }
     if(timer + timeout < pros::millis()) {
@@ -95,7 +95,7 @@ void Intake::task() {
   opticalSensor.set_led_pwm(99);
 
   bool sortRingDetected = false;
-  bool nextBlueRing = true;
+  bool nextBlueRing = false;
 
   while(true) {
     // ring detected at the bottom of intake
