@@ -78,7 +78,7 @@ void opcontrol() {
       }
       if(master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
         lb.move(0);
-      } else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+      } else if(master.get_digital(pros::E_CONTROLLER_DIGITAL_Y) || master.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
         lb.move(4);
       } else if(lb.isFinished()){
         lb.brake();
@@ -89,10 +89,10 @@ void opcontrol() {
       lb.reset();
     }
 
-    if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-      curext = !curext;
-      pneumatic_robot_extension.set_value(curext);
-    }
+    // if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
+    //   curext = !curext;
+    //   pneumatic_robot_extension.set_value(curext);
+    // }
 
 
     pros::delay(25);

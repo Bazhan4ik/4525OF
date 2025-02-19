@@ -39,12 +39,12 @@ void LadyBrown::move(int position) {
   } else if(position == 3) {
     currentTarget = 14000;
   } else if(position == 4) {
-    if(mode == 1) {
-      lady_brown_arm.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-      lady_brown_arm.move(127);
-      finished = true;
-      return;
-    }
+    // if(mode == 1) {
+    //   lady_brown_arm.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    //   lady_brown_arm.move(127);
+    //   finished = true;
+    //   return;
+    // }
     maxSpeed = 127;
     currentTarget = 18000;
   } else if(position == 0) {
