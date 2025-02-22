@@ -57,7 +57,7 @@ void align_bwd() {
 void skillsAfter2HighStake() {
 
   // move back
-  chassis.moveToPoint(60, -47, 1000, { .forwards=false });
+  chassis.moveToPoint(56, -47, 1000, { .forwards=false });
   lb.move(0);
 
 
@@ -160,7 +160,7 @@ void skillsAfter2HighStake() {
 
   chassis.setPose(0,0,0);
 
-  chassis.moveToPoint(0, 20, 1000, { .forwards=false });
+  chassis.moveToPoint(0, 20, 1000, { });
 
 
   chassis.waitUntilDone();
@@ -202,25 +202,26 @@ void skills() {
   chassis.turnToHeading(90, 1000);
 
   // pickup first ring
-  chassis.moveToPoint(33, 21, 1000);
+  chassis.moveToPoint(33, 22.5, 1000);
   intake.run();
 
   // turn to the ring in the middle
   chassis.turnToHeading(135, 1000, { .earlyExitRange=50 });
-  intake.waitUntilScored(2000);
+  intake.waitUntilScored(1200);
 
   intake.run(1);
 
 
   // go to the middle
-  chassis.moveToPoint(59, 0, 1000, { .maxSpeed=80 });
+  chassis.moveToPoint(59, 0, 1000, { .maxSpeed=80, .earlyExitRange=11 });
   chassis.waitUntil(35);
   intake.run();
   // currently picking up ring in the middle
-  chassis.turnToHeading(45, 1000);
+  chassis.turnToHeading(45, 1000, { .minSpeed=20, .earlyExitRange=40 });
   // intake.waitUntilScored(2000);
   // go to the ring that goes to lady brown
   chassis.moveToPoint(83, 22.5, 2000, { .maxSpeed=80 });
+  chassis.waitUntil(30);
   intake.run(1);
 
 
@@ -238,17 +239,16 @@ void skills() {
 
   // align with the high stake
   chassis.moveToPoint(66, 50.0, 2000, { .maxSpeed=70, .minSpeed=40, .earlyExitRange=12 });
-  chassis.moveToPoint(63.5, 65,  2000, { .maxSpeed=55, .minSpeed=35 });
+  chassis.moveToPoint(63.5, 65,  2000, { .maxSpeed=50, .minSpeed=35 });
 
 
   // chassis.turnToHeading(0, 1000);
   lb.move(1);
-  intake.run(1);
+  intake.run();
 
   // get close to highstake
   lb.waitUntilDone();
-  intake.run();
-  intake.waitUntilScored(3000);
+  intake.waitUntilScored(1500);
   intake.stop();
   // chassis.waitUntil(7);
   lb.move(4);
@@ -347,15 +347,15 @@ void skills() {
   chassis.moveToPoint(11, -49, 3000, { .forwards=false, });
 
   // pickup last ring
-  chassis.turnToPoint(11.5, -56, 1000);
-  chassis.moveToPoint(11.5, -56, 1000);
+  chassis.turnToPoint(11.5, -58, 1000);
+  chassis.moveToPoint(11.5, -58, 1000);
   chassis.waitUntilDone();
 
   // turn to corner
-  chassis.turnToPoint(1, -60, 1000, { .forwards=false });
+  chassis.turnToPoint(3, -61, 1000, { .forwards=false });
   // wait for last ring to score
-  intake.waitUntilScored(1500);
-  chassis.moveToPoint(1, -60, 1000, { .forwards=false });
+  // intake.waitUntilScored(1500);
+  chassis.moveToPoint(3, -61, 1000, { .forwards=false });
   // drop the mogo of in the corner
   mogo_ungrab();
   grab = false;
@@ -365,28 +365,25 @@ void skills() {
   // align with the high stake
   chassis.turnToPoint(56, -44.5, 3000);
   chassis.moveToPoint(35.9, -50.5, 2000, { .minSpeed=80, .earlyExitRange=6 });
-  chassis.moveToPoint(54, -44.5, 3000, { .maxSpeed=40 });
+  chassis.moveToPoint(54, -44.5, 3000, { .maxSpeed=30 });
   grab = true;
 
   chassis.turnToHeading(180, 1000, { .minSpeed=20, .earlyExitRange=20 });
 
   // close to high stake
-  chassis.moveToPoint(54.5, -66, 2000, { .maxSpeed=40 });
+  chassis.moveToPoint(54.5, -66, 2000, { .maxSpeed=35 });
   lb.move(1);
-  lb.waitUntilDone();
   intake.run();
-  intake.waitUntilScored(2000);
+  intake.waitUntilScored(3000);
   intake.stop();
-  chassis.waitUntilDone();
   lb.move(4);
   align();
   // reset position
-  chassis.setPose(60, -58.5, chassis.getPose().theta);
+  chassis.setPose(58.5, -62, chassis.getPose().theta);
   lb.waitUntilDone();
 
 
   skillsAfter2HighStake();
-
 }
 
 
