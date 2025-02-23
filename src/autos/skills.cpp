@@ -115,8 +115,8 @@ void skillsAfter2HighStake() {
 
 
   // closer to corner 
-  chassis.turnToPoint(120, 59, 1000, { .forwards=false });
-  chassis.moveToPoint(120, 59, 1000, { .forwards=false });
+  chassis.turnToPoint(120, 59, 5000, { .forwards=false });
+  chassis.moveToPoint(120, 59, 500, { .forwards=false });
   mogo_ungrab();
   grab = false;
 
@@ -134,11 +134,11 @@ void skillsAfter2HighStake() {
 
   // align with aliance stake
   chassis.moveToPoint(108, -5, 1000, { .forwards=false, .minSpeed=80, .earlyExitRange=8 });
-  chassis.moveToPoint(108, 2, 1000, { .maxSpeed=40 });
-  chassis.turnToHeading(-90, 1000);
+  chassis.moveToPoint(108, 2, 500, { .maxSpeed=40 });
+  chassis.turnToHeading(-90, 1000, { .minSpeed=20, .earlyExitRange=20 });
 
   // move closer to aliance stake
-  chassis.moveToPoint(123.3, 4, 2500, { .forwards=false, .maxSpeed=50, .minSpeed=30 });
+  chassis.moveToPoint(123.3, 4, 1200, { .forwards=false, .maxSpeed=60, .minSpeed=50 });
   chassis.waitUntilDone();
   align_bwd();
 
@@ -193,37 +193,38 @@ void skills() {
 
 
   // move back from alliance stake
-  chassis.moveToPoint(12.5, 0, 1000, { .maxSpeed=90 });
+  chassis.moveToPoint(12, 0, 1000, { .maxSpeed=90 });
   chassis.turnToHeading(180, 1000);
 
 
   // pick up mogo
-  chassis.moveToPoint(14, 21.1, 1000, { .forwards=false, .maxSpeed=70 });
-  chassis.turnToHeading(90, 1000);
+  chassis.moveToPoint(13.5, 21.1, 1000, { .forwards=false, .maxSpeed=55 });
+  chassis.turnToHeading(90, 1000, { .minSpeed=20, .earlyExitRange=20 });
 
   // pickup first ring
-  chassis.moveToPoint(33, 22.5, 1000);
+  chassis.moveToPoint(30, 22.5, 1000, { .minSpeed=40, .earlyExitRange=9 });
   intake.run();
 
   // turn to the ring in the middle
-  chassis.turnToHeading(135, 1000, { .earlyExitRange=50 });
-  intake.waitUntilScored(1200);
+  chassis.turnToHeading(135, 1000, { .minSpeed=20, .earlyExitRange=40 });
 
-  intake.run(1);
+
+  // intake.stop();
+  // return;
 
 
   // go to the middle
-  chassis.moveToPoint(59, 0, 1000, { .maxSpeed=80, .earlyExitRange=11 });
-  chassis.waitUntil(35);
+  // chassis.moveToPoint(59, 0, 1000, { .maxSpeed=80, .earlyExitRange=13 });
+  chassis.moveToPoint(49, 0, 1000, { .maxSpeed=80, .earlyExitRange=13 });
+  intake.run(1);
+  chassis.waitUntil(25);
   intake.run();
   // currently picking up ring in the middle
-  chassis.turnToHeading(45, 1000, { .minSpeed=20, .earlyExitRange=40 });
+  // chassis.turnToHeading(45, 1000, { .minSpeed=20, .earlyExitRange=40 });
   // intake.waitUntilScored(2000);
   // go to the ring that goes to lady brown
-  chassis.moveToPoint(83, 22.5, 2000, { .maxSpeed=80 });
-  chassis.waitUntil(30);
-  intake.run(1);
-
+  chassis.moveToPoint(79, 22.5, 2000, { .maxSpeed=80, .minSpeed=20, .earlyExitRange=8 });
+  // chassis.waitUntil(30);
 
   // if only one ring was scored, wait until second one is scored
   // only third ring goes to lady brown
@@ -234,12 +235,13 @@ void skills() {
 
 
   // turn to the high stake
-  chassis.turnToPoint(63, 44.0, 1000, { .minSpeed=80, .earlyExitRange=30 });
+  chassis.turnToPoint(60, 40.0, 1000, { .minSpeed=80, .earlyExitRange=30 });
   intake.run();
 
   // align with the high stake
-  chassis.moveToPoint(66, 50.0, 2000, { .maxSpeed=70, .minSpeed=40, .earlyExitRange=12 });
-  chassis.moveToPoint(63.5, 65,  2000, { .maxSpeed=50, .minSpeed=35 });
+  chassis.moveToPoint(53, 45.0, 2000, { .maxSpeed=70, .minSpeed=40, .earlyExitRange=8 });
+  // move closer to the high stake
+  chassis.moveToPose(51, 65, 180, 1200, { .maxSpeed=35, .minSpeed=25 });
 
 
   // chassis.turnToHeading(0, 1000);
@@ -321,34 +323,34 @@ void skills() {
 
 
   // pickup mogo
-  chassis.moveToPoint(8, -10.0 , 3000, { .forwards=false, .minSpeed=100, .earlyExitRange=10 });
+  chassis.moveToPoint(8, -10.0 , 3000, { .forwards=false, .minSpeed=100, .earlyExitRange=14 });
   chassis.moveToPoint(7, -23.5, 3000, { .forwards=false, .maxSpeed=40 });
 
 
   // turn to the first ring
-  // chassis.turnToPoint(29, -23, 1000, { .minSpeed=30, .earlyExitRange=5 });
   chassis.turnToPoint(29, -23, 1000);
+  // chassis.turnToPoint(29, -23, 1000, { .minSpeed=20, .earlyExitRange=40 });
   chassis.moveToPoint(29, -23, 1000);
   intake.run();
 
 
   // turn to the second ring
-  // chassis.turnToPoint(33, -45.6, 1000, { .minSpeed=30, .earlyExitRange=5 });
+  // chassis.turnToPoint(33, -45.6, 1000, { .minSpeed=20, .earlyExitRange=40 });
   chassis.turnToPoint(31, -45.6, 1000);
   chassis.moveToPoint(31, -45.6, 1000);
 
 
 
   // pickup two rings
-  chassis.turnToPoint(3, -49, 3000);
-  chassis.moveToPoint(3, -49, 3000, { .maxSpeed=70 });
+  chassis.turnToPoint(1, -49, 3000, { .minSpeed=20, .earlyExitRange=40 });
+  chassis.moveToPoint(1, -49, 3000, { .maxSpeed=70 });
 
   // backup for the last ring
-  chassis.moveToPoint(11, -49, 3000, { .forwards=false, });
+  chassis.moveToPoint(10, -49, 3000, { .forwards=false, });
 
   // pickup last ring
-  chassis.turnToPoint(11.5, -58, 1000);
-  chassis.moveToPoint(11.5, -58, 1000);
+  chassis.turnToPoint(11, -58, 1000);
+  chassis.moveToPoint(11, -58, 1000);
   chassis.waitUntilDone();
 
   // turn to corner
@@ -371,7 +373,7 @@ void skills() {
   chassis.turnToHeading(180, 1000, { .minSpeed=20, .earlyExitRange=20 });
 
   // close to high stake
-  chassis.moveToPoint(54.5, -66, 2000, { .maxSpeed=35 });
+  chassis.moveToPoint(54.5, -66, 1200, { .maxSpeed=35 });
   lb.move(1);
   intake.run();
   intake.waitUntilScored(3000);
@@ -379,7 +381,7 @@ void skills() {
   lb.move(4);
   align();
   // reset position
-  chassis.setPose(58.5, -62, chassis.getPose().theta);
+  chassis.setPose(60.5, -62, chassis.getPose().theta);
   lb.waitUntilDone();
 
 
