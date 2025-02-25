@@ -46,6 +46,37 @@ void competition_initialize() {}
 void autonomous() {
   pneumatic_intake.set_value(true);
 
+  // double ring side
+  intake.setAlliance('r');
+
+  chassis.setPose(0, 0, 28.3);
+
+  chassis.moveToPoint(-16, -29, 2000, { .forwards=false, .maxSpeed=50 });
+
+  chassis.turnToHeading(135, 1000);
+
+  chassis.moveToPoint(-2.5, -45.5, 1000);
+  intake.run();
+
+  chassis.moveToPoint(-3, -44, 1000, { .forwards=false });
+
+
+  chassis.turnToPoint(8.5, -46, 1000);
+  chassis.moveToPoint(8.5, -46, 1000);
+
+  chassis.moveToPoint(-3, -42, 1000, { .forwards=false });
+
+  chassis.turnToPoint(6, -33, 1000);
+  chassis.moveToPoint(6, -33, 1000);
+
+
+
+  
+
+
+  return;
+
+
   auto_goalRush();
 
   return;
