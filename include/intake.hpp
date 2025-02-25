@@ -29,6 +29,7 @@ class Intake {
 private:
 
   int mode;
+  int alliance; // 0 is sort red, 1 is sort blue 
 
   bool wheelsAllowed;
   bool chainAllowed;
@@ -58,6 +59,9 @@ public:
   void stop();
 
   void setMode(int mode);
+
+
+  void setAlliance(char alliance);
 
   void waitUntilScored(int timeout);
 };

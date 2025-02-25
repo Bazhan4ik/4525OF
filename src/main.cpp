@@ -1,4 +1,5 @@
 #include "main.h"
+#include "config.hpp"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 #include "liblvgl/llemu.hpp"
 #include "pros/misc.h"
@@ -44,6 +45,11 @@ void competition_initialize() {}
 
 void autonomous() {
   pneumatic_intake.set_value(true);
+
+  auto_goalRush();
+
+  return;
+
  
   skills();
 }
@@ -51,7 +57,7 @@ void autonomous() {
 
 
 void opcontrol() {
-  pneumatic_intake.set_value(true);
+  // pneumatic_intake.set_value(true);
   intake.setMode(1);
   lb.setMode(1);
 
@@ -89,10 +95,12 @@ void opcontrol() {
       lb.reset();
     }
 
-    // if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
-    //   curext = !curext;
-    //   pneumatic_robot_extension.set_value(curext);
-    // }
+    if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+      pneumatic_robot_extension.set_value(true);
+    }
+    if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+      pneumatic_robot_extension.set_value(false);
+    }
 
 
     pros::delay(25);

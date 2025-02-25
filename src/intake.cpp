@@ -12,7 +12,7 @@ IntakeMotors::IntakeMotors() : speed(127), reversed(false) { }
 Intake::Intake() {
   wheelsAllowed = false;
   chainAllowed = false;
-  mode = 0;
+  alliance = 0;
   scored = 0;
   IntakeMotors motors;
 }
@@ -53,9 +53,18 @@ void Intake::setReverse(bool value) {
   motors.setReverse(value);
 }
 
+
 void Intake::setMode(int m) {
-  mode = 1;
+  mode = m;
 }
+void Intake::setAlliance(char m) {
+  if(m == 'b') {
+    alliance = 0;
+  } else {
+    alliance = 1;
+  }
+}
+
 
 
 void Intake::run() {
@@ -96,17 +105,19 @@ void Intake::task() {
 
   bool sortRingDetected = false;
   bool nextBlueRing = false;
+  bool nextRedRing = false;
 
   while(true) {
     // ring detected at the bottom of intake
     if(opticalSensor.get_proximity() > 244) {
       // next ring is blue
       nextBlueRing = opticalSensor.get_rgb().blue > opticalSensor.get_rgb().red;
+      nextRedRing = opticalSensor.get_rgb().blue < opticalSensor.get_rgb().red;
     }
 
     // button at the top is pressed and the ring is blue -> throw it away
     if(ringDetector.get_value()) {
-      if(nextBlueRing) {
+      if((nextBlueRing && alliance == 1) || (nextRedRing && alliance == 0)) {
         pros::delay(50);
         motors.setBrakeMode(pros::MotorBrake::hold);
         motors.stopChain();
