@@ -46,6 +46,19 @@ void competition_initialize() {}
 void autonomous() {
   pneumatic_intake.set_value(true);
 
+
+  // safe awp
+  //    score alliance
+  //    score right mogo: 1
+  //    score left mogo: middle ring + one more 
+
+
+  
+
+  
+
+  return;
+
   // double ring side
   intake.setAlliance('r');
 
