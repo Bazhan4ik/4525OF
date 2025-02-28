@@ -124,7 +124,7 @@ void LadyBrown::task() {
 
     printf("LADYBROWN REPORT motorpower: %f  ::: error: %d  ::: currentposition: %d", voltage, error, currentPosition);
 
-    pros::lcd::print(5, "error: %d", error);
+    pros::lcd::print(5, "error: %d", currentPosition);
     pros::lcd::print(6, "motorpower: %f", voltage);
     pros::lcd::print(7, "VELOCITY: %d", lady_brown_arm.get_actual_velocity());
 

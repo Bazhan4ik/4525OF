@@ -34,6 +34,8 @@ private:
   bool wheelsAllowed;
   bool chainAllowed;
 
+  bool shouldHold;
+
   IntakeMotors motors;
 
   int getMode() { return mode; }
@@ -64,6 +66,9 @@ public:
   void setAlliance(char alliance);
 
   void waitUntilScored(int timeout);
+
+  void hold();
+
 };
 
 

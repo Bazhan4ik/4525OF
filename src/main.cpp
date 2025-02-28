@@ -47,55 +47,54 @@ void autonomous() {
   pneumatic_intake.set_value(true);
 
 
-  // safe awp
-  //    score alliance
-  //    score right mogo: 1
-  //    score left mogo: middle ring + one more 
+  // BLUE goal rush
+  // 2 ring mogo, 1 ring mogo, close to corner
+        // auto_goalRush(1);
+  // 2 ring mogo, 1 ring mogo, touch the tower 
+        auto_goalRush(2);
+
+// RED goal rush: 2 ring mogo + 1 ring mogo + tower
+        // auto_goalRush_red(1, 1);
+        // auto_goalRush_red(1, 0); // NO TOWER
+// RED goal rush: 1 ring + 1 ring mogo + tower
+        // auto_goalRush_red(2, 1);
+        // auto_goalRush_red(2, 0); // NO TOWER
+ 
+
+// awp
+          // auto_alliance_blue(2, 1);     FINISH ALL BLUE
+          // auto_alliance_red(2, 1);
+// alliance, 3 ring mogo, corner
+          // auto_alliance_blue(1, 1);
+          // auto_alliance_red(1, 1);
+// alliance, 3 ring mogo, tower
+          // auto_alliance_blue(1, 2);
+          // auto_alliance_red(1, 2);
+// alliance, 4 ring mogo, tower
+          // auto_alliance_blue(1, 3);
+          // auto_alliance_red(1, 3);
+
+
+
+// 4 rings + tower
+            //  neg_blue(1);
+            // neg_red(1);
+// 4 rings + corner
+            //  neg_blue(2);
+            //  neg_red(2);
+// 5 rings + tower 
+            //  neg_blue(3);
+            //  neg_red(3);
+// 5 rings + corner
+            //  neg_blue(4);
+            //  neg_red(4);
+  
 
 
   
-
-  
-
-  return;
-
-  // double ring side
-  intake.setAlliance('r');
-
-  chassis.setPose(0, 0, 28.3);
-
-  chassis.moveToPoint(-16, -29, 2000, { .forwards=false, .maxSpeed=50 });
-
-  chassis.turnToHeading(135, 1000);
-
-  chassis.moveToPoint(-2.5, -45.5, 1000);
-  intake.run();
-
-  chassis.moveToPoint(-3, -44, 1000, { .forwards=false });
-
-
-  chassis.turnToPoint(8.5, -46, 1000);
-  chassis.moveToPoint(8.5, -46, 1000);
-
-  chassis.moveToPoint(-3, -42, 1000, { .forwards=false });
-
-  chassis.turnToPoint(6, -33, 1000);
-  chassis.moveToPoint(6, -33, 1000);
-
-
-
-  
-
-
-  return;
-
-
-  auto_goalRush();
-
-  return;
 
  
-  skills();
+  // skills();
 }
 
 

@@ -3,6 +3,7 @@
 #include "pros/abstract_motor.hpp"
 #include "pros/misc.h"
 #include "pros/rtos.hpp"
+#include "lady-brown.hpp"
 
 
 
@@ -86,7 +87,7 @@ void Intake::waitUntilScored(int timeout) {
   int timer = pros::millis();
   while(true) {
     if(ringDetector.get_value()) {
-      pros::delay(200);
+      pros::delay(350);
       return;
     }
     if(timer + timeout < pros::millis()) {
@@ -99,6 +100,11 @@ void Intake::waitUntilScored(int timeout) {
 
 
 
+void Intake::hold() {
+  shouldHold = true;
+}
+
+
 void Intake::task() {
   opticalSensor.set_integration_time(20);
   opticalSensor.set_led_pwm(99);
@@ -109,20 +115,28 @@ void Intake::task() {
 
   while(true) {
     // ring detected at the bottom of intake
-    if(opticalSensor.get_proximity() > 244) {
+    if(opticalSensor.get_proximity() > 254) {
       // next ring is blue
       nextBlueRing = opticalSensor.get_rgb().blue > opticalSensor.get_rgb().red;
       nextRedRing = opticalSensor.get_rgb().blue < opticalSensor.get_rgb().red;
+
+      if(shouldHold) {
+        run(1);
+        shouldHold = false;
+      }
     }
 
     // button at the top is pressed and the ring is blue -> throw it away
     if(ringDetector.get_value()) {
-      if((nextBlueRing && alliance == 1) || (nextRedRing && alliance == 0)) {
+      if(
+          (nextBlueRing && alliance == 1)
+            ||
+          (nextRedRing && alliance == 0)) {
         pros::delay(50);
         motors.setBrakeMode(pros::MotorBrake::hold);
         motors.stopChain();
         motors.stopWheels();
-        pros::delay(350);
+        pros::delay(250);
       } else {
         scored += 1;
       }
