@@ -9,4 +9,7 @@ extern void align_bwd();
 extern void neg_blue(int o);
 extern void neg_red(int o);
 
+extern void red_pos();
+
+
 extern void skills();

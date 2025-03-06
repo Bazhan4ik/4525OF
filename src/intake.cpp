@@ -13,7 +13,7 @@ IntakeMotors::IntakeMotors() : speed(127), reversed(false) { }
 Intake::Intake() {
   wheelsAllowed = false;
   chainAllowed = false;
-  alliance = 0;
+  alliance = 2;
   scored = 0;
   IntakeMotors motors;
 }
@@ -61,8 +61,10 @@ void Intake::setMode(int m) {
 void Intake::setAlliance(char m) {
   if(m == 'b') {
     alliance = 0;
-  } else {
+  } else if (m == 'r') {
     alliance = 1;
+  } else {
+    alliance = 2;
   }
 }
 
@@ -132,7 +134,7 @@ void Intake::task() {
           (nextBlueRing && alliance == 1)
             ||
           (nextRedRing && alliance == 0)) {
-        pros::delay(50);
+        pros::delay(40);
         motors.setBrakeMode(pros::MotorBrake::hold);
         motors.stopChain();
         motors.stopWheels();

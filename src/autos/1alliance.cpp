@@ -110,11 +110,13 @@ void auto_alliance_blue(int option1, int option2) {
   chassis.moveToPoint(39, 35, 2000, { });
   chassis.waitUntil(20);
   mogo_ungrab();
+  grab = false;
   intake.run(1);
 
   // mogo pickup
   chassis.turnToPoint(43, 10, 2000, {.forwards=false });
   chassis.moveToPoint(43, 10, 2000, {.forwards=false, .maxSpeed=50 });
+  grab = true;
   chassis.waitUntilDone();
   intake.run();
   intake.waitUntilScored(1000);
@@ -255,6 +257,9 @@ void auto_alliance_red(int option1, int option2) {
   // pickup mogo
   chassis.turnToPoint(41, 6, 2000, { .forwards=false, });
   chassis.moveToPoint(41, 6, 2000, { .forwards=false, .maxSpeed=50 });
+
+  chassis.waitUntilDone();
+  pros::delay(300);
 
 
 

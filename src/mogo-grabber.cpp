@@ -8,6 +8,7 @@
 bool grab = true;
 bool givetime = false;
 bool grabbed = false;
+bool ungrabbed = false;
 
 void mogo_disable() {
   grab = false;
@@ -26,10 +27,14 @@ void mogo_grabber() {
       continue;
     }
 
+    // if(ungrabbed) {
+    //   pros::delay(500);
+    //   ungrabbed = false;
+    // }
+
     if(grab) {
 
-
-      if(distance_sensor.get_distance() < 22) {
+      if(distance_sensor.get_distance() < 23) {
         if(givetime) {
           givetime = false;
           pros::delay(250);
@@ -49,4 +54,5 @@ void mogo_ungrab() {
   givetime = false;
   grab = true;
   grabbed = false;
+  ungrabbed = true;
 }

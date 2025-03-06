@@ -121,9 +121,29 @@ void auto_goalRush(int opt1) {
   chassis.turnToPoint(9, 6.2, 1000);
   chassis.moveToPoint(9, 6.2, 1000);
   intake.run();
+  if(opt1 == 3) {
+    intake.waitUntilScored(1000);
+    intake.run(1);
+
+    chassis.turnToHeading(0, 1000);
+    chassis.waitUntilDone();
+    mogo_ungrab();
+
+    chassis.moveToPoint(9, 9.7, 1000);
+    chassis.turnToPoint(-11, 33.7, 2000, { .forwards=false });
+    chassis.moveToPoint(-8, 30, 2000, { .forwards=false, .maxSpeed=40 });
+    grab = true;
+    chassis.waitUntilDone();
+
+    chassis.moveToPoint(7, 26, 2000, { .maxSpeed=50, .minSpeed=20 });
+
+    intake.run();
+    pros::delay(1000);
+
+    lb.move(3);
+  }
 
   if(opt1 == 3) {
-    finish_with_alliance();
     return;
   }
 
@@ -174,33 +194,36 @@ void auto_goalRush_red(int opt1, int opt2) {
   intake.setAlliance('r');
   chassis.setPose(0, 0, 67);
 
-  chassis.moveToPoint(31, 12, 2000, {});
+  // rush for mogo
+  chassis.moveToPoint(36.64, 12.63, 2000, {});
   pneumatic_robot_extension.set_value(true);
   intake.run(1);
   chassis.waitUntil(29);
   pneumatic_robot_extension.set_value(false);
 
-  chassis.moveToPoint(17, 7, 1000, { .forwards=false, .maxSpeed=60 });
+  // move back from mogo
+  chassis.moveToPoint(17, 7, 10000, { .forwards=false, .maxSpeed=70 });
   chassis.waitUntilDone();
 
   pneumatic_robot_extension.set_value(true);
-  pros::delay(200);
+  pros::delay(300);
 
   // turn to pick up mogo
   chassis.turnToPoint(27.5, 38, 2000, { .forwards=false, });
 
-  chassis.waitUntil(30);
+  pros::delay(300);
   pneumatic_robot_extension.set_value(false);
 
   // grabbing mogo
-  chassis.moveToPoint(26, 40, 2000, { .forwards=false, .maxSpeed=50 });
+  chassis.moveToPoint(24, 40, 2000, { .forwards=false, .maxSpeed=50 });
   chassis.waitUntilDone();
 
   if(grabbed) {
     chassis.moveToPoint(26, 35, 1000);
 
     intake.run();
-    intake.waitUntilScored(600);
+    pros::delay(400);
+    // intake.waitUntilScored(600);
     if(opt1 == 1) {
       // if we are going for third ring, put two on this mogo
       intake.waitUntilScored(1000);
@@ -210,25 +233,26 @@ void auto_goalRush_red(int opt1, int opt2) {
     }
 
     mogo_ungrab();
+    pros::delay(200);
     grab = false;
   }
 
   // grabbing second mogo
   chassis.moveToPoint(14.5, 6, 1500, { .maxSpeed=60 });
   chassis.turnToPoint(36, 7.6, 1000, { .forwards=false });
-  chassis.moveToPoint(36, 7.6, 1000, { .forwards=false, .maxSpeed=45 });
+  chassis.moveToPoint(35, 7.6, 1000, { .forwards=false, .maxSpeed=45 });
   grab = true;
   givetime = true;
   while(true) {
     if(grabbed || !chassis.isInMotion()) {
+      chassis.cancelMotion();
+      left_motors.brake();
+      right_motors.brake();
       pros::delay(400);
       break;
     }
     pros::delay(20);
   }
-  chassis.cancelMotion();
-  left_motors.brake();
-  right_motors.brake();
 
   if(!grabbed) {
     chassis.moveToPoint(26, 7.6, 1000, { .forwards=false, .maxSpeed=45 });

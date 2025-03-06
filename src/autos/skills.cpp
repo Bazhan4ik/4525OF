@@ -173,6 +173,7 @@ void skillsAfter2HighStake() {
 
 void skills() {
   intake.setAlliance('r');
+  mogo_ungrab();
   pneumatic_intake.set_value(false);
 
 
@@ -200,7 +201,14 @@ void skills() {
 
 
   // pick up mogo
-  chassis.moveToPoint(13.5, 21.1, 1000, { .forwards=false, .maxSpeed=55 });
+  chassis.moveToPoint(13.5, 23, 1000, { .forwards=false, .maxSpeed=55 });
+  while(true) {
+    if(grabbed) {
+      pros::delay(100);
+      break;
+    }
+    pros::delay(20);
+  }
   chassis.turnToHeading(90, 1000, { .minSpeed=20, .earlyExitRange=20 });
 
   // pickup first ring
@@ -217,7 +225,7 @@ void skills() {
 
   // go to the middle
   // chassis.moveToPoint(59, 0, 1000, { .maxSpeed=80, .earlyExitRange=13 });
-  chassis.moveToPoint(49, 0, 1000, { .maxSpeed=80, .earlyExitRange=13 });
+  chassis.moveToPoint(47.5, 2, 1000, { .maxSpeed=70, .earlyExitRange=15 });
   intake.run(1);
   chassis.waitUntil(25);
   intake.run();
@@ -243,7 +251,7 @@ void skills() {
   // align with the high stake
   chassis.moveToPoint(53, 45.0, 2000, { .maxSpeed=70, .minSpeed=40, .earlyExitRange=8 });
   // move closer to the high stake
-  chassis.moveToPose(51, 65, 180, 1200, { .maxSpeed=35, .minSpeed=25 });
+  chassis.moveToPose(51.5, 68.5, 180, 1200, { .maxSpeed=35, .minSpeed=25 });
 
 
   // chassis.turnToHeading(0, 1000);
@@ -379,7 +387,7 @@ void skills() {
   chassis.turnToHeading(180, 1000, { .minSpeed=20, .earlyExitRange=20 });
 
   // close to high stake
-  chassis.moveToPoint(59, -67, 1200, { .maxSpeed=35 });
+  chassis.moveToPoint(59, -69, 1200, { .maxSpeed=35 });
   lb.move(1);
   intake.run();
   intake.waitUntilScored(3000);

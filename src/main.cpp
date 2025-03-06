@@ -46,12 +46,18 @@ void competition_initialize() {}
 void autonomous() {
   pneumatic_intake.set_value(true);
 
+  // newest: red alliance stake + mogo 1 ring + mogo 1 ring
+  red_pos();
+
+
 
   // BLUE goal rush
   // 2 ring mogo, 1 ring mogo, close to corner
         // auto_goalRush(1);
   // 2 ring mogo, 1 ring mogo, touch the tower 
-        auto_goalRush(2);
+        // auto_goalRush(2);
+  // 1 ring mogo, 1 ring mogo, touch the tower
+        // auto_goalRush(3);
 
 // RED goal rush: 2 ring mogo + 1 ring mogo + tower
         // auto_goalRush_red(1, 1);
@@ -62,7 +68,7 @@ void autonomous() {
  
 
 // awp
-          // auto_alliance_blue(2, 1);     FINISH ALL BLUE
+          // auto_alliance_blue(2, 1);     // FINISH ALL BLUE
           // auto_alliance_red(2, 1);
 // alliance, 3 ring mogo, corner
           // auto_alliance_blue(1, 1);
@@ -100,9 +106,15 @@ void autonomous() {
 
 
 void opcontrol() {
-  // pneumatic_intake.set_value(true);
+
+  pneumatic_intake.set_value(true);
+
+
   intake.setMode(1);
   lb.setMode(1);
+
+
+  // intake.setAlliance('r');
 
   bool curext = false;
 
@@ -122,7 +134,10 @@ void opcontrol() {
 
 
     if(lb.isFinished()) {
-      if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) || master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+      if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+        intake.setAlliance('n');
+      }
+      if(master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
         lb.move(1);
       }
       if(master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
