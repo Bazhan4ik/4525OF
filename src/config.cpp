@@ -27,19 +27,19 @@ double horizontal_tw_offset = -1.0;
 double vertical_tw_offset = 0;
 
 
-pros::MotorGroup intake_chain ({14});
-pros::MotorGroup intake_stage1({-13});
+pros::MotorGroup intake_chain ({17});
+pros::MotorGroup intake_stage1({-16});
 
-pros::MotorGroup lady_brown_arm ({-15});
+pros::MotorGroup lady_brown_arm ({-6});
 
-pros::adi::DigitalOut pneumatic_mogo_grabber('B', LOW);
+pros::adi::DigitalOut pneumatic_mogo_grabber('H', LOW);
 // extension arm to move corner rings
 
-pros::adi::DigitalOut pneumatic_robot_extension('C', LOW);
+pros::adi::DigitalOut pneumatic_robot_extension('G', LOW);
 pros::adi::DigitalOut pneumatic_intake('D', HIGH);
 
-pros::MotorGroup right_motors({-5, -9, 8}, pros::MotorGearset::blue);   // left motors on ports 1, 2, 3
-pros::MotorGroup left_motors({19, -20, 17}, pros::MotorGearset::blue); // right motors on ports 4, 5, 6
+pros::MotorGroup right_motors({-11, 12, -13}, pros::MotorGearset::blue);   // left motors on ports 1, 2, 3
+pros::MotorGroup left_motors({1, 2, -3}, pros::MotorGearset::blue); // right motors on ports 4, 5, 6
 
 
 
@@ -66,12 +66,12 @@ lemlib::OdomSensors sensors(&tw_vertical, nullptr, nullptr, nullptr, &imu);
 // lemlib::OdomSensors sensors(&tw_left_motors, &tw_right_motors, &tw_horizontal, nullptr, &imu);
 
 
-pros::adi::DigitalIn ringDetector ('G');
+pros::adi::DigitalIn ringDetector ('A');
 
 
-pros::Rotation rotation_arm(3);
+pros::Rotation rotation_arm(-5);
 pros::Optical opticalSensor (12);
-pros::Distance distance_sensor (18);
+pros::Distance distance_sensor (14);
 /**
  * =-
  * SENSORS END 

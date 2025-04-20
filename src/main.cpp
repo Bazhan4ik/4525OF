@@ -149,14 +149,14 @@ void opcontrol() {
       }
     }
 
-    if(master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-      lb.reset();
-    }
+    // if(master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+    //   lb.reset();
+    // }
 
     if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
       pneumatic_robot_extension.set_value(true);
     }
-    if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+    if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
       pneumatic_robot_extension.set_value(false);
     }
 

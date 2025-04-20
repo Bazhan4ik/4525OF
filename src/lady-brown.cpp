@@ -30,8 +30,8 @@ void LadyBrown::move(int position) {
   // return;
 
   if(position == 1) {
-    maxSpeed = 50;
-    currentTarget = 3600;
+    maxSpeed = 30;
+    currentTarget = 2900;
     lady_brown_arm.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
   } else if(position == 2) {
     maxSpeed = 50;
@@ -95,11 +95,8 @@ void LadyBrown::task() {
   while(true) {
     pros::delay(20);
 
-    // if(finished) {
-    //   pros::lcd::print(6, "IN LOOP: TRUE");
-    // } else {
-    //   pros::lcd::print(6, "IN LOOP: FALSE");
-    // }
+
+
 
     if(finished) {
       continue;
@@ -110,7 +107,7 @@ void LadyBrown::task() {
     // continue;
 
     timerDone = pros::millis() > timer + 1300;
-    currentPosition = -rotation_arm.get_position();
+    currentPosition = rotation_arm.get_position();
 
 
     int error = currentTarget - currentPosition;

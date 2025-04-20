@@ -21,7 +21,7 @@ void mogo_grabber() {
   while(true) {
     pros::delay(20);
 
-    // pros::lcd::print(3, "%d", distance_sensor.get_distance());
+    pros::lcd::print(4, "%d", distance_sensor.get_distance());
 
     if(grabbed) {
       continue;
@@ -34,7 +34,7 @@ void mogo_grabber() {
 
     if(grab) {
 
-      if(distance_sensor.get_distance() < 23) {
+      if(distance_sensor.get_distance() > 30 && distance_sensor.get_distance() < 40) {
         if(givetime) {
           givetime = false;
           pros::delay(250);
